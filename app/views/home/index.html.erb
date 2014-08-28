@@ -21,7 +21,7 @@
 </head>
 <body class="">
   <section class="vbox">
-    <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+    <header class="bg-white-only header header-md navbar navbar-fixed-top-xs" style="background-color:#5a6a7a">
      
     </header>
     <section>
@@ -38,6 +38,10 @@
               <section class="vbox">
                 <section class="scrollable padder-lg w-f-md" id="bjax-target" style="background-color: #F2F4F8">
                   <a href="../home/new" class="pull-right text-muted m-t-lg"><i class="icon-plus i-lg  inline" id="refresh"></i> Add Movie</a>
+                  <div class="pull-right text-muted m-t-lg" style="padding-right:20px;color: #999;"><%= link_to(:order => 'date') do %><i class="icon-refresh i-lg inline"></i> Sort By Date<% end %></div>
+                  <div class="pull-right text-muted m-t-lg" style="padding-right:20px;"><%= link_to(:order => 'title') do %><i class="icon-refresh i-lg inline"></i> Sort By Title<% end %></div>
+                  <div class="pull-right text-muted m-t-lg" style="padding-right:20px;"><%= link_to(:order => 'rating') do %><i class="icon-refresh i-lg inline"></i> Sort By Rating<% end %></div>
+
                   <h2 class="font-thin m-b">Drew's Movie Database <span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
                     <span class="bar1 a1 bg-primary lter"></span>
                     <span class="bar2 a2 bg-info lt"></span>
@@ -46,37 +50,47 @@
                     <span class="bar5 a5 bg-danger dker"></span>
                   </span></h2>
                   <div class="row row-sm">
+
+                  <% if @movies != nil %>
+                  <% @movies.each do |movie| %>
+                  <!-- Movie Starts Here -->
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="item">
                         <div class="pos-rlt">
                         <div class="top">
-                          <span class="pull-right m-t-sm m-r-sm badge bg-info">VHS</span>
+                          <span class="pull-right m-t-sm m-r-sm badge bg-info"><%= movie.format %></span>
                         </div>
                           <div class="bottom">
-                            <span class="badge bg-info m-l-sm m-b-sm">03:20</span>
+                            <span class="badge bg-info m-l-sm m-b-sm"><%= movie.hours %>:<%= movie.minutes %></span>
                           </div>
                           <div class="item-overlay opacity r r-2x bg-black">
                             <div class="text-info padder m-t-sm text-sm">
+                            <% movie.rating.times do |rate| %>
                               <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
+                            <% end %>
+                            <% excess = 5 - movie.rating %>
+                            <% excess.times do |leftover| %>
                               <i class="fa fa-star-o text-muted"></i>
+                            <% end %>
                             </div>
                             <div class="bottom padder m-b-sm">
-                              <a href="#" class="pull-right">
-                                <i class="fa fa-close"></i> Delete Movie
+                              <!-- <a href="../home/<%= movie.id %>" action="destroy" class="pull-right"> -->
+                                <i class="fa fa-close pull-right">
+                              <%= link_to "Delete Movie", {:controller => "home", :action => 'destroy', :id => movie.id}, :confirm => "Are you sure you want to unfriend?", :method => :delete %></i>
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="assets/p1.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src=<%= movie.image_url %> alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
-                          <a href="#" class="text-ellipsis">Tempered Song</a>
-                          <a href="#" class="text-ellipsis text-xs text-muted">Miaow</a>
+                          <a href="#" class="text-ellipsis"><%= movie.title %></a>
+                          <a href="#" class="text-ellipsis text-xs text-muted"><%= movie.release %></a>
                         </div>
                       </div>
                     </div>
+                  <!-- Movie Ends Here -->
+                  <% end %>
+                  <% end %>
 
                   </div>
                 </section>
