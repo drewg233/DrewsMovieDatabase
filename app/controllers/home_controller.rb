@@ -16,9 +16,9 @@ class HomeController < ApplicationController
     end
   end
   def create
-  	# Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], params[:image_url], params[:format], params[:trailer])
+  	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], params[:image_url], params[:format], params[:trailer])
 
-    redirect_to :action=>"index", :controller=>"home", :flash => { :error => params[:trailer] }
+    redirect_to :action=>"index", :controller=>"home"
   end
   def destroy
     theMovie = Movie.where(id: params[:id].to_i)[0]
