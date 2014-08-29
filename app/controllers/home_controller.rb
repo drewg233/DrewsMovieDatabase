@@ -16,7 +16,7 @@ class HomeController < ApplicationController
     end
   end
   def create
-  	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], params[:image_url], params[:format])
+  	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], params[:image_url], params[:format], params[:trailer])
     redirect_to :action=>"index", :controller=>"home"
   end
   def destroy
@@ -33,6 +33,7 @@ class HomeController < ApplicationController
     movie.release = params[:release]
     movie.image_url = params[:image_url]
     movie.format = params[:format]
+    movie.trailer = params[:trailer]
     movie.save
 
   	redirect_to :action=>"index", :controller=>"home"
