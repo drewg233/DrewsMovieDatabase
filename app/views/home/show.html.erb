@@ -1,0 +1,170 @@
+<style type="text/css">
+  
+.movieimage {
+  width: 187px;
+  height: 280px;
+  border-radius: 5px;
+}
+
+.movieimagecontainer {
+  padding-left: 100px;
+}
+
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en" class="app">
+<head>  
+  <meta charset="utf-8" />
+  <title>DMD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="js/jPlayer/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="css/font.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.css" type="text/css" />  
+</head>
+<body class="">
+  <section class="vbox">
+    <header class="bg-white-only header header-md navbar navbar-fixed-top-xs" style="background-color:#5a6a7a">
+     <div class="main-links" style="padding-right:20px;">
+      <a href="../start/index">Home</a>
+      <a href="../home/index">Movies</a>
+     </div>
+    </header>
+    <section>
+      <section class="hbox stretch">
+        </div>
+      </section>
+            
+          </section>
+        </aside>
+        <!-- /.aside -->
+        <section id="content">
+          <section class="hbox stretch">
+            <section>
+              <section class="vbox">
+                <section class="scrollable padder-lg w-f-md" id="bjax-target" style="background-color: #F2F4F8">
+                  <a href="../home/new" class="pull-right text-muted m-t-lg"><i class="icon-plus i-lg  inline" id="refresh"></i> Add Movie</a>
+                  <div class="pull-right text-muted m-t-lg" style="padding-right:20px;color: #999;"><%= link_to(:order => 'date') do %><i class="icon-refresh i-lg inline"></i> Sort By Date<% end %></div>
+                  <div class="pull-right text-muted m-t-lg" style="padding-right:20px;"><%= link_to(:order => 'title') do %><i class="icon-refresh i-lg inline"></i> Sort By Title<% end %></div>
+                  <div class="pull-right text-muted m-t-lg" style="padding-right:20px;"><%= link_to(:order => 'rating') do %><i class="icon-refresh i-lg inline"></i> Sort By Rating<% end %></div>
+
+                  <h2 class="font-thin m-b">Drew's Movie Database <span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
+                    <span class="bar1 a1 bg-primary lter"></span>
+                    <span class="bar2 a2 bg-info lt"></span>
+                    <span class="bar3 a3 bg-success"></span>
+                    <span class="bar4 a4 bg-warning dk"></span>
+                    <span class="bar5 a5 bg-danger dker"></span>
+                  </span></h2>
+                  <div class="row">
+                  <div class="col-sm-2">
+                    <img src=<%= @movie.image_url %> alt="" class="movieimage">
+                  </div>
+
+
+
+
+                  <div class="col-sm-10">
+                    <section class="panel panel-default">
+                      <header class="panel-heading font-bold">Edit <%= @movie.title %></header>
+                      <div class="panel-body">
+                        <%= form_for :home, :method => :put do |f| %>
+                          <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="title" class="form-control" required="" value="<%= @movie.title %>">
+                          </div>
+                          <div class="form-group">
+                            <label>Length</label>
+                            <input type="text" name="hours" class="form-control" required="" placeholder="Hours" value="<%= @movie.hours %>">
+                            <div style="padding-top:10px;"></div>
+                            <input type="text" name="minutes" class="form-control" required="" placeholder="Minutes" value="<%= @movie.minutes %>">
+                          </div>
+                          <div class="form-group">
+                            <label>Rating</label>
+                            <input type="text" name="rating" class="form-control" placeholder="1-5" required="" value="<%= @movie.rating %>">
+                          </div>
+                          <div class="form-group">
+                            <label>Release Year</label>
+                            <input type="text" name="release" class="form-control" required="" value="<%= @movie.release %>">
+                          </div>
+                          <div class="form-group">
+                            <label>IMDB Image URL</label>
+                            <input type="text" name="image_url" class="form-control" required="" value="<%= @movie.image_url %>">
+                          </div>
+                          <label>Movie Format</label>
+                          <div class="radio i-checks">
+                            <label>
+                            <% if @movie.format == "VHS" %>
+                              <input type="radio" name="format" value="VHS" checked="">
+                            <% else %>
+                              <input type="radio" name="format" value="VHS">
+                            <% end %>
+                              <i></i>
+                              VHS
+                            </label>
+                          </div>
+                          <div class="radio i-checks">
+                            <label>
+                            <% if @movie.format == "DVD" %>
+                              <input type="radio" name="format" value="DVD" checked="">
+                            <% else %>
+                              <input type="radio" name="format" value="DVD">
+                            <% end %>
+                              <i></i>
+                              DVD
+                            </label>
+                          </div>
+                          <div class="radio i-checks">
+                            <label>
+                              <% if @movie.format == "Streaming" %>
+                                <input type="radio" name="format" value="Streaming" checked="">
+                              <% else %>
+                                <input type="radio" name="format" value="Streaming">
+                              <% end %>
+                              <i></i>
+                              Streaming
+                            </label>
+                          </div>
+                          <button type="submit" class="btn btn-sm btn-default">Update</button>
+                          <%end%>
+                        </form>
+
+                      </div>
+                    </section>
+                  </div>
+
+                  </div>
+                </section>
+                <footer class="footer bg-dark">
+                  <div id="jp_container_N">
+                  <div class="main-links">
+                    <a href="../start/index">Home</a>
+                    <a href="../home/index">Movies</a>
+                  </div>
+                  </div>
+                </footer>
+              </section>
+            </section>
+
+          </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen,open" data-target="#nav,html"></a>
+        </section>
+      </section>
+    </section>    
+  </section>
+  <script src="js/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/bootstrap.js"></script>
+  <!-- App -->
+  <script src="js/app.js"></script>  
+  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/app.plugin.js"></script>
+  <script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>
+  <script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+  <script type="text/javascript" src="js/jPlayer/demo.js"></script>
+</body>
+</html>

@@ -22,13 +22,25 @@ class HomeController < ApplicationController
   def destroy
     theMovie = Movie.where(id: params[:id].to_i)[0]
     theMovie.delete
-  	redirect_to :action=>"index", :controller=>"home"
+    redirect_to :action=>"index", :controller=>"home"
   end
   def update
+    movie = Movie.where(id: params[:id].to_i)[0]
+    movie.title = params[:title]
+    movie.hours = params[:hours]
+    movie.minutes = params[:minutes]
+    movie.rating = params[:rating]
+    movie.release = params[:release]
+    movie.image_url = params[:image_url]
+    movie.format = params[:format]
+    movie.save
+
+  	redirect_to :action=>"index", :controller=>"home"
   end
   def new
   end
   def show
+    @movie = Movie.where(id: params[:id].to_i)[0]
   end
   def delete
   end
