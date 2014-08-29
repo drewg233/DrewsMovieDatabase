@@ -16,6 +16,7 @@ class HomeController < ApplicationController
     end
   end
   def create
+    binding.remote_pry
   	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], params[:image_url], params[:format], params[:trailer])
     redirect_to :action=>"index", :controller=>"home"
   end
