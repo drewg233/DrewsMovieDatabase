@@ -1,3 +1,5 @@
+require 'aws-sdk'
+
 class HomeController < ApplicationController
 	skip_before_filter :verify_authenticity_token  
   def index
@@ -21,8 +23,8 @@ class HomeController < ApplicationController
    AWS.config(
         :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
         :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-      )
-    bucket_name = 'hiremeremote'
+    )
+    bucket_name = 'moviedatabase'
     photo_path = params[:image_url]
     s3 = AWS::S3.new
     key = photo_path.original_filename
@@ -32,7 +34,6 @@ class HomeController < ApplicationController
     doomsday = Time.mktime(2038, 1, 18).to_i
     image.public_url(:expires => doomsday)
     url_string = image.public_url.to_s
-
 
   	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], url_string, params[:format], params[:trailer])
     redirect_to :action=>"index", :controller=>"home"
