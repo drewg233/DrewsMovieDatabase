@@ -51,7 +51,8 @@
                     <section class="panel panel-default">
                       <header class="panel-heading font-bold">Add A Movie</header>
                       <div class="panel-body">
-                        <form action="../home" method="post">
+                        <!-- <form action="../home" method="post"> -->
+                        <%= form_tag("../home", method: "post", :multipart => true) do |f| %>
                           <div class="form-group">
                             <label>Title</label>
                             <input type="text" name="title" class="form-control" required="">
@@ -72,8 +73,7 @@
                           </div>
                           <div class="form-group">
                             <label>IMDB Image URL</label>
-                            <input type="text" name="image_url" class="form-control" required="" placeholder="http://ia.media-imdb.com/images/M/MV5BNjA4ODYxMDU3Nl5BMl5BanBnXkFtZTcwMzkzMTk3OA@@._V1_SX214_AL_.jpg">
-                            <i>**Required Found by searching movie on IMDB >> right click image >> copy image url</i> 
+                            <%= file_field_tag 'image_url' %>
                           </div>
                           <div class="form-group">
                             <label>YouTube Embedded Trailer</label>
@@ -103,7 +103,8 @@
                             </label>
                           </div>
                           <button type="submit" class="btn btn-sm btn-default">Submit</button>
-                        </form>
+                          <% end %>
+                        <!-- </form> -->
                       </div>
                     </section>
                   </div>

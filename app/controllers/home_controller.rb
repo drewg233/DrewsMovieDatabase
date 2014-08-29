@@ -16,7 +16,25 @@ class HomeController < ApplicationController
     end
   end
   def create
-  	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], params[:image_url], params[:format], params[:trailer])
+
+
+   AWS.config(
+        :access_key_id => ENV['AWS_ACCESS_KEY_ID'], 
+        :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      )
+    bucket_name = 'hiremeremote'
+    photo_path = params[:image_url]
+    s3 = AWS::S3.new
+    key = photo_path.original_filename
+    image = s3.buckets[bucket_name].objects[key].write(:file => photo_path)
+    puts "Uploading file #{photo_path} to bucket #{bucket_name}."
+
+    doomsday = Time.mktime(2038, 1, 18).to_i
+    image.public_url(:expires => doomsday)
+    url_string = image.public_url.to_s
+
+
+  	Movie.addNewMovie(params[:title], params[:hours], params[:minutes], params[:rating], params[:release], url_string, params[:format], params[:trailer])
     redirect_to :action=>"index", :controller=>"home"
   end
   def destroy
