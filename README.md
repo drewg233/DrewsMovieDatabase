@@ -1,4 +1,4 @@
-* Movie Database
+#Movie Database
 
 Just a simple movie database. 
 
