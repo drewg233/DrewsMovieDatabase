@@ -31,6 +31,7 @@ GEM
     aws-sdk (1.51.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    bcrypt (3.1.7)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -45,6 +46,12 @@ GEM
     coffee-script-source (1.8.0)
     columnize (0.8.9)
     debugger-linecache (1.2.0)
+    devise (3.2.4)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.1)
     hike (1.2.3)
@@ -68,6 +75,7 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.0)
@@ -134,6 +142,8 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -141,6 +151,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   coffee-rails (~> 4.0.0)
+  devise
   imdb
   jbuilder (~> 2.0)
   jquery-rails

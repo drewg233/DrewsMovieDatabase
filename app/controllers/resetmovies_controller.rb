@@ -1,4 +1,5 @@
 class ResetmoviesController < ApplicationController
+	before_action :authenticate_user!
   def index
   		Movie.delete_all
   		Movie.create(title: 'Braveheart', hours: '2', minutes: '57', format: 'VHS', release: '1995', rating: '4', image_url: 'https://moviedatabase.s3.amazonaws.com/braveheart.jpg', trailer: '<iframe width="560" height="315" src="//www.youtube.com/embed/vbnGDeq40hI" frameborder="0" allowfullscreen></iframe>')

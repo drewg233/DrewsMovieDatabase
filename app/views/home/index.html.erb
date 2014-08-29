@@ -26,6 +26,12 @@
   <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs" style="background-color:#5a6a7a">
      <div class="main-links" style="padding-right:20px;">
+     <% if user_signed_in? == false %>
+       <a href="../users/sign_in">Sign In</a>
+       <a href="../users/sign_up">Sign Up</a>
+    <% else %>
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+     <% end %>
       <a href="../start/index">Home</a>
       <a href="../home/index">Movies</a>
      </div>
@@ -43,7 +49,9 @@
             <section>
               <section class="vbox">
                 <section class="scrollable padder-lg w-f-md" id="bjax-target" style="background-color: #F2F4F8">
-                  <a href="../home/new" class="pull-right text-muted m-t-lg"><i class="icon-plus i-lg  inline" id="refresh"></i> Add Movie</a>
+                  <% if user_signed_in? %>
+                    <a href="../home/new" class="pull-right text-muted m-t-lg"><i class="icon-plus i-lg  inline" id="refresh"></i> Add Movie</a>
+                  <% end %>
                   <div class="pull-right text-muted m-t-lg" style="padding-right:20px;color: #999;"><%= link_to(:order => 'date') do %><i class="icon-refresh i-lg inline"></i> Sort By Date<% end %></div>
                   <div class="pull-right text-muted m-t-lg" style="padding-right:20px;"><%= link_to(:order => 'title') do %><i class="icon-refresh i-lg inline"></i> Sort By Title<% end %></div>
                   <div class="pull-right text-muted m-t-lg" style="padding-right:20px;"><%= link_to(:order => 'rating') do %><i class="icon-refresh i-lg inline"></i> Sort By Rating<% end %></div>
@@ -113,7 +121,9 @@
                 <footer class="footer bg-dark">
                   <div id="jp_container_N">
                   <div class="main-links">
+                    <% if user_signed_in? %>
                     <a href="../resetmovies/index" onclick="return confirm('Are you absolutely sure?')">Reset Movies</a>
+                    <% end %>
                     <a href="../start/index">Home</a>
                     <a href="../home/index">Movies</a>
                   </div>

@@ -1,0 +1,37 @@
+<html class="" style="height:100%;">
+<body class="bg-info dker" style="height:100%;">
+  <section id="content" class="m-t-lg wrapper-md animated fadeInUp" style="
+    margin-top: 0px;">    
+    <div class="container aside-xl">
+      <h1 class="navbar-brand block"><span class="h1 font-bold">DrewsMD</span></h1>
+      <section class="m-b-lg">
+        <header class="wrapper text-center">
+        </header>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">
+<!--             <input type="email" placeholder="Email" name="email" class="form-control rounded input-lg text-center no-border"> -->
+						<%= f.email_field :email, autofocus: true, :class => "form-control rounded input-lg text-center no-border", :placeholder=>"Email"%>
+          </div>
+          <div class="form-group">
+<!--              <input type="password" placeholder="Password" name="password" class="form-control rounded input-lg text-center no-border"> -->
+						<%= f.password_field :password, autocomplete: "off", :class => "form-control rounded input-lg text-center no-border", :placeholder=>"Password" %>
+          </div>
+          <!-- <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign in</span></button> -->
+          <%= f.submit "Sign in", :class => "btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded" %>
+          <div class="line line-dashed"></div>
+          <p class="text-muted text-center"><small>Do not have an account?</small></p>
+          <a href="../users/sign_up" class="btn btn-lg btn-info btn-block rounded">Create an account</a>
+        <% end %>
+      </section>
+    </div>
+  </section>
+  <!-- footer -->
+  <footer id="footer">
+    <div class="text-center padder">
+      <p style="margin-bottom:0px;">
+        <small>Drew Garcia 2014</small>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
